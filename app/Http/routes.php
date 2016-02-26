@@ -35,10 +35,10 @@ Route::group(['middleware' => ['web']], function () {
 //$gasolina = new Gasolina;
 //$car = new Jeep($gasolina);
 
-$car = $this->app->bind('Fuel', '\App\Vehicle\Gasolina');
+$car = $this->app->bind('\App\Vehicles\Fuel', '\App\Vehicles\Gasolina');
 
 
-$car = $this->app->make('\App\Vehicle\Jeep');
+$car = $this->app->make('\App\Vehicles\Jeep');
 $cost = $car->refuel(60);
 
 echo $cost;
