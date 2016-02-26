@@ -83,7 +83,7 @@ class Petrol implements Fuel
 {
     public function getPrice()
     {
-        return 130.7;
+        return 1;
     }
 }
 
@@ -91,13 +91,18 @@ class Gasolina implements Fuel
 {
     public function getPrice()
     {
-        return 130.7;
+        return 2;
     }
 }
 
 
-$gasolina = new Gasolina;
-$car = new Jeep($gasolina);
+//$gasolina = new Gasolina;
+//$car = new Jeep($gasolina);
+
+$car = $this->app->bind('Fuel', 'Petrol');
+
 
 $car = $this->app->make('Jeep');
 $cost = $car->refuel(60);
+
+echo $cost;
