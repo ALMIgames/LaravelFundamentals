@@ -87,7 +87,12 @@ class Petrol
 //$gasolina = new Gasolina;
 //$car = new Jeep($gasolina);
 
-$car = $this->app->make('Jeep');
-echo $car->refuel(60);
+$car = $this->app->bind('Jeep', function(){
+    return "Soc un jeep!";
+});
 
-dd($this->app);
+$car = $this->app->make('Jeep');
+echo $car;
+//echo $car->refuel(60);
+
+//dd($this->app);
