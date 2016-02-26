@@ -62,10 +62,13 @@ Route::group(['middleware' => ['web']], function () {
 
 //DEPENDENCY INVERSION (D de SOLID)
 
+interface Fuel{
+    public function getPrice();
+}
 
 class Jeep
 {
-    public function __construct(Petrol $fuel)
+    public function __construct(Fuel $fuel)
     {
         $this->fuel = $fuel;
     }
@@ -76,7 +79,7 @@ class Jeep
     }
 }
 
-class Petrol
+class Petrol implements Fuel
 {
     public function getPrice()
     {
@@ -84,15 +87,17 @@ class Petrol
     }
 }
 
-//$gasolina = new Gasolina;
-//$car = new Jeep($gasolina);
+class Gasolina implements Fuel
+{
+    public function getPrice()
+    {
+        return 130.7;
+    }
+}
 
-$car = $this->app->bind('Jeep', function(){
-    return "Soc un jeep!";
-});
+
+$gasolina = new Gasolina;
+$car = new Jeep($gasolina);
 
 $car = $this->app->make('Jeep');
-echo $car;
-//echo $car->refuel(60);
-
-//dd($this->app);
+$cost = $car->refuel(60);
