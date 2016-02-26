@@ -30,9 +30,5 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
+Route::get('/vehiclecost', 'VehicleController@cost');
 
-
-$car = $this->app->make('\App\Vehicles\Jeep');
-$cost = $car->refuel(60);
-
-echo $cost;
