@@ -31,8 +31,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-//Dependency injection
-class JeepWrangler
+//Dependency injection correcte
+
+class Jeep
 {
     public function __construct(Petrol $fuel)
     {
@@ -57,3 +58,76 @@ $petrol = new Petrol;
 $car = new JeepWrangler($petrol);
 
 $cost = $car->refuel(60);
+
+
+
+//Dependency injection incorrecte
+
+//class JeepWrangler
+//{
+//    public function __construct()
+//    {
+//        $petrol = new Petrol;
+//        $this->fuel = $fuel;
+//    }
+//
+//    public function refuel($litres)
+//    {
+//        return $litres * $this->fuel->getPrice();
+//    }
+//}
+//
+//class Petrol
+//{
+//    public function getPrice()
+//    {
+//        return 130.7;
+//    }
+//}
+//
+//$car = new JeepWrangler($petrol);
+//
+//$cost = $car->refuel(60);
+
+
+
+//DEPENDENCY INVERSION (D de SOLID)
+
+
+//interface Fuel{
+//    public function getPrice();
+//}
+//
+//class JeepWrangler
+//{
+//    public function __construct(Fuel $fuel)
+//    {
+//        $this->fuel = $fuel;
+//    }
+//
+//    public function refuel($litres)
+//    {
+//        return $litres * $this->fuel->getPrice();
+//    }
+//}
+//
+//class Petrol implements Fuel
+//{
+//    public function getPrice()
+//    {
+//        return 130.7;
+//    }
+//}
+//
+//class Gasolina implements Fuel
+//{
+//    public function getPrice()
+//    {
+//        return 130.7;
+//    }
+//}
+//
+//$petrol = new Petrol;
+//$car = new JeepWrangler($petrol);
+//
+//$cost = $car->refuel(60);
